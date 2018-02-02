@@ -4,7 +4,7 @@
 
 use_bpm 127
 
-
+# IN PROGRESS: adding bass guitar in relation with drums ( view the two music sheets in previous comments )
 
 live_loop :hihat do
   sample :drum_cymbal_closed
