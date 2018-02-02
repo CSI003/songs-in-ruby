@@ -1,4 +1,4 @@
-# Welcome to Sonic Pi v2.11.1
+# stranger things challenge
 
 use_bpm 160
 use_synth :saw
