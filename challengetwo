@@ -1,0 +1,25 @@
+=begin
+
+YOUR TASK: Using the fewest lines of code possible, play every note (from lowest to highest) for ) 0.25 beats.
+
+=end
+
+
+#controls the beats per minute
+use_bpm 240
+
+#a modifier used to mask the original sound
+use_synth :piano
+
+#variable
+inc = 0
+
+#live loop of frequency change, never stops repeating
+live_loop :frequency do
+  #plays inc=0
+  play inc, amp: 2
+  #sleeps for "1" second or 0.25 seconds.
+  sleep 1
+  #increases the variable by 1 each loop
+  inc = inc + 1
+end
