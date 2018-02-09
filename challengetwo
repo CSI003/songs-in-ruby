@@ -1,25 +1,54 @@
 =begin
 
-YOUR TASK: Using the fewest lines of code possible, play every note (from lowest to highest) for ) 0.25 beats.
+DIRECTIONS: Remix this synth sound + drum beat using variables to increase the efficiency of the code.
 
 =end
 
+# sets the tempo of the song (beats per minute)
+use_bpm 120
 
-#controls the beats per minute
-use_bpm 240
+# a modifier used to mask the standard sound provided
+use_synth :dtri
 
-#a modifier used to mask the original sound
-use_synth :piano
+# a variable that is substituted in the first live_loop to make changing the sample more efficient
+issasample = :drum_cowbell #:loop_industrial #:loop_safari #:misc_burp #:elec_bell #:bd_fat #:ambi_glass_hum #:bd_boom
 
-#variable
-inc = 0
+# the variables used in the second live_loop for amplitude and cutoff (that way it doesnt get too loud)
+x = 0
+y = 100
 
-#live loop of frequency change, never stops repeating
-live_loop :frequency do
-  #plays inc=0
-  play inc, amp: 2
-  #sleeps for "1" second or 0.25 seconds.
+# the first live_loop, plays consistently even when the second live_loop can no longer continue
+live_loop :drum_beat do
+  # grabs the first variable we defined, "issasample"
+  sample issasample
+  # the sound plays for .25 of a second before the next one goes
+  sleep 0.5
+  sample issasample
+  sleep 1.5
+  sample issasample
+  sleep 2
+end
+
+# the second live_loop, does not play consistently because it gets cutoff by the y variable/function. the value of :cutoff must be 0 or greater
+live_loop :synth_sound do
+  # x starts off at 0 while y starts off at 100, as defined before
+  play :cs2, amp: x, cutoff: y
+  sleep 0.5
+  play :cs2, amp: x, cuttoff: y
+  sleep 0.5
+  play :e2, sustain: 0.5, amp: x, cuttoff: y
   sleep 1
-  #increases the variable by 1 each loop
-  inc = inc + 1
+  # plays two notes concurrently (at the same time)
+  play :cs2, sustain: 1, amp: x, cuttoff: y
+  play :cs1, sustain: 1, amp: x, cuttoff: y
+  sleep 2
+  # functions that allow the variables to be added onto or taken from
+  # raises the amplitude
+  x = x + 0.1
+  #prints x-value on the log >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  puts x
+  # counts down the cutoff
+  y = y - 5
+  #prints y-value on the log >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  puts y
 end
