@@ -6,7 +6,17 @@
 use_bpm 118
 
 
-
+#defines the main beats used through out the song, a function application
+define :main do
+  sample :drum_bass_soft, sustain: 2, amp: 10
+  sleep 2.5
+  sample :drum_cymbal_closed, amp: 10
+  sleep 2
+  sample :drum_bass_soft, amp: 5
+  sleep 0.25
+  sample :drum_bass_soft, amp: 5
+  sleep 2.5
+end
 
 sample :drum_bass_soft, sustain: 2, amp: 10
 sleep 2.5
@@ -17,19 +27,25 @@ sleep 0.25
 sample :drum_bass_soft, amp: 5
 sleep 5
 
+#work in progress
 live_loop :strings do
   with_fx :band_eq do
     play 51, sustain: 0.5
     sleep 2.5
   end
 end
+#work in progress end
 
-sample :drum_bass_soft,sustain: 2, amp: 10
-sleep 2.5
-sample :drum_cymbal_closed, amp: 10
-sleep 2
-sample :drum_bass_soft, amp: 5
-sleep 0.25
-sample :drum_bass_soft, amp: 5
-sleep 4
+live_loop :drums do
+  with_fx :distortion do
+    main #defined on lines 10 through 19
+    build = 2 # variable in a loop
+    3.times do #plays the build variable 3 times before reseting to 2
+      sample :drum_bass_soft, amp: build
+      sleep 1
+      build = build + 4
+    end
+    
+  end
+end
 
