@@ -33,7 +33,7 @@ sleep 5
 #work in progress
 live_loop :melody do
   with_fx :reverb do
-    play 51, sustain: 0.5, amp: 2
+    play 51, sustain: 0.5
     sleep 2.5
     play 58, sustain: 1
     sleep 2
