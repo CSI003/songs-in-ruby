@@ -4,56 +4,128 @@
 
 use_bpm 127
 
-# IN PROGRESS: adding bass guitar in relation with drums ( view the two music sheets in previous comments )
+
+#variables
+
+bass = :drum_bass_hard #:drum_heavy_kick #:drum_cowbell
+snare = :drum_snare_hard #:drum_splash_hard #:drum_snare_soft
+
+#end variables
+
+#arrays
+
+
+#end arrays
 
 live_loop :hihat do
   sample :drum_cymbal_closed
   sleep 0.5
 end
 
-sample :drum_snare_hard
-sleep 1
-
-21.times do
-  sync :hihat
-  sample :drum_bass_hard
+define :main do
+  sample bass
   sleep 1
-  sample :drum_snare_hard
+  sample snare
   sleep 1.5
-  sample :drum_bass_hard
-  sleep 0.55
-  sample :drum_snare_hard
+  sample bass
+  sleep 0.5
+  sample snare
   sleep 1
 end
 
-2.times do
-  sync :hihat
-  sample :drum_bass_hard
+define :transition do
+  sample bass
   sleep 1
-  sample :drum_snare_hard
+  sample snare
   sleep 1.5
-  sample :drum_bass_hard
-  sleep 0.55
-  sample :drum_snare_hard
+  sample bass
+  sleep 0.5
+  sample snare
   sleep 1
-  sample :drum_bass_hard, sustain: 0.5
+  sample bass, sustain: 0.5
   sample :drum_cymbal_closed
   sleep 0.5
 end
 
-1.times do
-  sync :hihat
-  sample :drum_bass_hard
+define :second do
+  sample bass
   sleep 1
-  sample :drum_snare_hard
+  sample snare
   sleep 1.5
-  sample :drum_bass_hard
-  sleep 0.55
-  sample :drum_bass_hard
-  sleep 0.55
-  sample :drum_snare_hard
+  sample bass
+  sleep 0.5
+  sample bass
+  sleep 0.5
+  sample snare
   sleep 1
-  sample :drum_bass_hard, sustain: 0.5
+  sample bass, sustain: 0.5
   sample :drum_cymbal_closed
-  sleep 0.4
+  sleep 0.5
+end
+
+define :thirtythree do
+  3.times do #plays the bass variable 3 times
+    sample bass
+    sleep 1
+  end
+  sample snare
+  sleep 1
+end
+
+define :chorus do
+  sample bass, sustain: 0.5
+  sample :drum_cymbal_closed
+  sleep 1
+  sample bass, sustain: 0.5
+  sample :drum_cymbal_closed
+  sleep 1
+  sample bass, sustain: 0.5
+  sleep 1
+  sample snare
+  sleep 1
+end
+
+define :thirtyfour do
+  sample bass, sustain: 0.5
+  sleep 1
+  sample snare
+  sleep 1
+  sample bass
+  sleep 1
+  sample snare
+  sleep 1
+  sample bass
+  sleep 1
+  sample bass
+  sleep 1
+  sample bass
+  sleep 1
+  sample snare
+  sleep 1
+end
+
+
+sample :drum_snare_hard
+sleep 1
+
+5.times do #21
+  sync :hihat
+  main
+end
+
+2.times do
+  sync :hihat
+  transition
+end
+
+1.times do
+  second
+end
+
+1.times do
+  thirtythree
+end
+
+3.times do
+  thirtyfour
 end
