@@ -14,7 +14,9 @@ drummer_boy = "C:/Users/merit_abshire/Music/custom_challenge/drum_beat.wav"
 sample_used = :bd_808
 
 
-live_loop :drum_beat do
+# function definitions - used to make the run more efficient / organized
+
+define :main_drum do
   sample sample_used, amp: 2
   sleep 0.5
   sample sample_used, amp: 2
@@ -23,8 +25,7 @@ live_loop :drum_beat do
   sleep 2
 end
 
-
-live_loop :synth_sound do
+define :notes do
   play :cs2
   sleep 0.5
   play :cs2
@@ -37,13 +38,29 @@ live_loop :synth_sound do
   sleep 2
 end
 
-live_loop :kanye_vocals do
+define :vocals do
   sample kanye_vocals
   print sample_duration kanye_vocals
   sleep 16 # this sleep is 8 because the sleep of both loops above are 4 allowing us to stay 'in pocket'
 end
 
-#live loop decreases in amplitude 4 times and then resets x (amp) 5
+
+#song
+
+live_loop :drum_beat do
+  main_drum
+end
+
+live_loop :synth_sound do
+  notes
+end
+
+live_loop :kanye_vocals do
+  vocals
+end
+
+#question for eric: is it possible to define a function that has a variable? if so, how?
+
 live_loop :drummer_boy do
   x = 5
   4.times do
